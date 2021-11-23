@@ -1,0 +1,10 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      path: '/console'
+  datasource:
+    url: 'jdbc:h2:file:C:/Nauka/PrzyszlyProgramista/Java/Projekty/Cwiczenia/TaskManager/task-db'
+  main:
+    banner-mode: off
+task.allowMultipleTasksFromTemplate: false
