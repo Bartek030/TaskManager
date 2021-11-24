@@ -22,6 +22,6 @@ class InfoController {
 
     @GetMapping("/info/prop")
     boolean myProp() {
-        return myProp.isAllowMultipleFromTemplate();
+        return myProp.getTemplate().isAllowMultipleTasks();
     }
 }
