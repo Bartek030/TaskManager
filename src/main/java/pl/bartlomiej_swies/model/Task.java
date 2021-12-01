@@ -2,6 +2,7 @@ package pl.bartlomiej_swies.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks")
@@ -12,6 +13,9 @@ public class Task {
     @NotBlank(message = "Task's description must be not blank")
     private String description;
     private boolean done;
+    private LocalDateTime deadline;
+    @Embedded
+    private Audit audit = new Audit();
 
     Task() {
     }
@@ -20,7 +24,7 @@ public class Task {
         return id;
     }
 
-    public void setId(int id) {
+    void setId(final int id) {
         this.id = id;
     }
 
@@ -28,7 +32,7 @@ public class Task {
         return description;
     }
 
-    void setDescription(String description) {
+    void setDescription(final String description) {
         this.description = description;
     }
 
@@ -36,7 +40,21 @@ public class Task {
         return done;
     }
 
-    void setDone(boolean done) {
+    public void setDone(final boolean done) {
         this.done = done;
+    }
+
+    public LocalDateTime getDeadline() {
+        return deadline;
+    }
+
+    void setDeadline(LocalDateTime deadline) {
+        this.deadline = deadline;
+    }
+
+    public void updateFrom(final Task source) {
+        description = source.description;
+        done = source.done;
+        deadline = source.deadline;
     }
 }
