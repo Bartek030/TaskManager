@@ -12,8 +12,6 @@ import pl.bartlomiej_swies.model.projection.GroupWriteModel;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
-@RequestScope
 public class TaskGroupService {
 
     private TaskGroupRepository repository;
