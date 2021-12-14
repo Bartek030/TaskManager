@@ -1,9 +1,7 @@
 package pl.bartlomiej_swies.model.projection;
 
-import pl.bartlomiej_swies.model.Task;
 import pl.bartlomiej_swies.model.TaskGroup;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -33,7 +31,7 @@ public class GroupWriteModel {
         result.setDescription(description);
         result.setTasks(
             tasks.stream()
-            .map(GroupTaskWriteModel::toTask)
+            .map(source -> source.toTask(result))
             .collect(Collectors.toSet())
         );
         return result;
