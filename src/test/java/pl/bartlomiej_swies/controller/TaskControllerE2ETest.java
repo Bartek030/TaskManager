@@ -11,6 +11,7 @@ import pl.bartlomiej_swies.model.TaskRepository;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.ArgumentMatchers.anyInt;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class TaskControllerE2ETest {
@@ -32,11 +33,24 @@ class TaskControllerE2ETest {
         repository.save(new Task("foo", LocalDateTime.now()));
         repository.save(new Task("bar", LocalDateTime.now()));
 
-
         // when
         Task[] result = restTemplate.getForObject("http://localhost:" + port + "/tasks", Task[].class);
 
         // then
         assertThat(result).hasSize(initial + 2);
+    }
+
+    @Test
+    void httpGet_returns_task_by_given_id() {
+
+        // given
+        repository.save(new Task("foo", LocalDateTime.now()));
+        repository.save(new Task("bar", LocalDateTime.now()));
+
+        /// when
+        Task result = restTemplate.getForObject("http://localhost:" + port + "/tasks/1", Task.class);
+
+        // then
+        assertThat(result).isNotNull();
     }
 }
