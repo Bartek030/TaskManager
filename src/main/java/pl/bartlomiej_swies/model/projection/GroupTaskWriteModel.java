@@ -1,6 +1,7 @@
 package pl.bartlomiej_swies.model.projection;
 
 import pl.bartlomiej_swies.model.Task;
+import pl.bartlomiej_swies.model.TaskGroup;
 
 import java.time.LocalDateTime;
 
@@ -25,7 +26,7 @@ public class GroupTaskWriteModel {
         this.deadline = deadline;
     }
 
-    public Task toTask() {
-        return new Task(description, deadline);
+    Task toTask(final TaskGroup group) {
+        return new Task(description, deadline, group);
     }
 }
