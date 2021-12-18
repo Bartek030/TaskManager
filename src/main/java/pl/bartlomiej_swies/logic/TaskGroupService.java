@@ -1,8 +1,5 @@
 package pl.bartlomiej_swies.logic;
 
-import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.RequestScope;
-import pl.bartlomiej_swies.TaskConfigurationProperties;
 import pl.bartlomiej_swies.model.TaskGroup;
 import pl.bartlomiej_swies.model.TaskGroupRepository;
 import pl.bartlomiej_swies.model.TaskRepository;
