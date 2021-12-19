@@ -5,6 +5,7 @@ import pl.bartlomiej_swies.model.*;
 import pl.bartlomiej_swies.model.projection.GroupReadModel;
 import pl.bartlomiej_swies.model.projection.GroupTaskWriteModel;
 import pl.bartlomiej_swies.model.projection.GroupWriteModel;
+import pl.bartlomiej_swies.model.projection.ProjectWriteModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,8 +29,8 @@ public class ProjectService {
         return repository.findAll();
     }
 
-    public Project save(final Project toSave) {
-        return repository.save(toSave);
+    public Project save(final ProjectWriteModel toSave) {
+        return repository.save(toSave.toProject());
     }
 
     public GroupReadModel createGroup(LocalDateTime deadline, int projectId) {
@@ -49,7 +50,7 @@ public class ProjectService {
                             return task;
                         }).collect(Collectors.toSet())
                 );
-                return taskGroupService.createGroup(targetGroup);
+                return taskGroupService.createGroup(targetGroup, project);
             }).orElseThrow(() -> new IllegalArgumentException("Project with given id not found"));
     }
 }
