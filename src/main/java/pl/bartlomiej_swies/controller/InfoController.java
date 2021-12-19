@@ -2,10 +2,12 @@ package pl.bartlomiej_swies.controller;
 
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.bartlomiej_swies.TaskConfigurationProperties;
 
 @RestController
+@RequestMapping("/info")
 class InfoController {
     private DataSourceProperties dataSource;
     private TaskConfigurationProperties myProp;
@@ -15,12 +17,12 @@ class InfoController {
         this.myProp = myProp;
     }
 
-    @GetMapping("/info/url")
+    @GetMapping("/url")
     String url() {
         return dataSource.getUrl();
     }
 
-    @GetMapping("/info/prop")
+    @GetMapping("/prop")
     boolean myProp() {
         return myProp.getTemplate().isAllowMultipleTasks();
     }
