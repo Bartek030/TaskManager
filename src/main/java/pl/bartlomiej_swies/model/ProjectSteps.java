@@ -20,7 +20,7 @@ public class ProjectSteps {
     @JoinColumn(name = "project_id")
     private Project project;
 
-    ProjectSteps() {
+    public ProjectSteps() {
     }
 
     public int getId() {
