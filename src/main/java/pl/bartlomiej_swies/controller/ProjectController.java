@@ -40,7 +40,7 @@ public class ProjectController {
         }
         service.save(current);
         model.addAttribute("project", new ProjectWriteModel());
-        model.addAttribute("project", getProjects());
+        model.addAttribute("projects", getProjects());
         model.addAttribute("message", "Dodano projekt!");
         return "projects";
     }
