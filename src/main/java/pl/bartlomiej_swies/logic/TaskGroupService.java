@@ -1,5 +1,6 @@
 package pl.bartlomiej_swies.logic;
 
+import pl.bartlomiej_swies.model.Project;
 import pl.bartlomiej_swies.model.TaskGroup;
 import pl.bartlomiej_swies.model.TaskGroupRepository;
 import pl.bartlomiej_swies.model.TaskRepository;
@@ -14,13 +15,17 @@ public class TaskGroupService {
     private TaskGroupRepository repository;
     private TaskRepository taskRepository;
 
-    TaskGroupService(TaskGroupRepository repository, final TaskRepository taskRepository) {
+    TaskGroupService(final TaskGroupRepository repository, final TaskRepository taskRepository) {
         this.repository = repository;
         this.taskRepository = taskRepository;
     }
 
     public GroupReadModel createGroup(final GroupWriteModel source) {
-        TaskGroup result = repository.save(source.toGroup());
+        return createGroup(source, null);
+    }
+
+    GroupReadModel createGroup(final GroupWriteModel source, final Project project) {
+        TaskGroup result = repository.save(source.toGroup(project));
         return new GroupReadModel(result);
     }
 
