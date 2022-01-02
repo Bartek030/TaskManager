@@ -6,31 +6,27 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import pl.bartlomiej_swies.logic.TaskService;
 import pl.bartlomiej_swies.model.Task;
 import pl.bartlomiej_swies.model.TaskRepository;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/tasks")
 class TaskController {
     private static final Logger logger = LoggerFactory.getLogger(TaskController.class);
     private final TaskRepository repository;
-    private final TaskService service;
 
-    TaskController(final TaskRepository repository, final TaskService service) {
+    TaskController(final TaskRepository repository) {
         this.repository = repository;
-        this.service = service;
     }
 
     @GetMapping(params = {"!sort", "!page", "!size"})
-    CompletableFuture<ResponseEntity<List<Task>>> readAllTasks() {
-        logger.warn("Exposing all the tasks");
-        return service.findAllAsync().thenApply(ResponseEntity::ok);
+    ResponseEntity<List<Task>> readAllTasks() {
+        logger.warn("Exposing all the tasks!");
+        return ResponseEntity.ok(repository.findAll());
     }
 
     @GetMapping
