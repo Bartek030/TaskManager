@@ -42,6 +42,8 @@ class SecurityConfiguration extends KeycloakWebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/info/*")
                 .hasRole("USER")
+                .antMatchers("/projects")
+                .hasRole("ADMIN")
                 .anyRequest()
                 .permitAll();
     }
