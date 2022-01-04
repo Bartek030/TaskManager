@@ -2,6 +2,8 @@ package pl.bartlomiej_swies.controller;
 
 import io.micrometer.core.annotation.Timed;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/projects")
 public class ProjectController {
     private final ProjectService service;
@@ -25,9 +28,12 @@ public class ProjectController {
     }
 
     @GetMapping
-    String showProjects(Model model) {
-        model.addAttribute("project", new ProjectWriteModel());
-        return "projects";
+    String showProjects(Model model, Authentication auth) {
+//        if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            model.addAttribute("project", new ProjectWriteModel());
+            return "projects";
+//        }
+//        return "index";
     }
 
     @PostMapping
