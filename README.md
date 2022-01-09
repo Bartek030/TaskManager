@@ -1,5 +1,5 @@
 # Task Manager
-> This is my training project in which I have learned how Spring framework work and how to use it.
+> This is my training project in which I have learned how Spring framework works and how to use it.
 
 ## Technologies Used
 - Java - version 11.0
