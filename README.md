@@ -4,6 +4,7 @@
 ## Technologies Used
 - Java - version 11.0
 - Spring framework - version 2.5.6
+- Maven - version 4.0.0
 
 And through Spring framework:
 - H2 database with flyway migrations
